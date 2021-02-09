@@ -5,41 +5,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project</title>
-  <meta name="keywords" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.">
-  <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.">
+  <title>Expression Tree</title>
+  <meta name="keywords" content="Expression Tree Mhfa fediya yasinkh">
+  <meta name="description" content="Expression Tree by yasinkh & mhfa">
 
   <link rel="stylesheet" href="{% static 'main/assets/fonts/flat-icon/flaticon.css' %}">
   <link rel="stylesheet" href="{% static 'main/assets/bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+  <link rel="icon" href="{% static 'main/assets/images/calculator.png' %}" type="image/gif" sizes="16x16">
 </head>
 
-<body>
+<body >
   <div id="content-wrapper">
 
 
 
-    <section class="service">
+    <section class="service" >
       <div class="container">
         <div class="page-section">
           <h2 class="page-section__title">رسم درخت</h2>
-          <img class="page-section__title-style" src="{% static 'main/assets/images/title-style.png' %}" alt="">
-          <p class="page-section__paragraph">یک عبارت نیمه پرانتز گذاری شده در کادر زیر وارد کنید</p>
-          <p class="page-section__paragraph">برنامه از عملگر های ضرب،جمع،تقسیم،تفریق،نقیض و توان پشتیبانی میکند</p>
-          <form style="    text-align: center;" method='post'>
+          <img class="page-section__title-style" src="{% static 'main/assets/images/title-style.png' %}" alt="under_p">
+          <p class="page-section__paragraph" style="direction: rtl;"> یک عبارت نیمه پرانتز گذاری شده در کادر زیر وارد کنید و سپس اینتر را بزنید. </p>
+          <p class="page-section__paragraph">.برنامه از عملگر های ضرب ، جمع ، تقسیم ، تفریق ، نقیض و توان پشتیبانی میکند</p>
+          <form style="    text-align: center;" method='post'  onsubmit="Uploading()">
             {% csrf_token %}
+
             <input type="text" name="search" id="search" placeholder="{{expression}}"
-              style="margin-bottom: 6rem;text-align: center; margin-top: 10px ;    direction: ltr;">
+              style="margin-bottom: 8rem;text-align: center; margin-top: 5rem ;    direction: ltr;">
 
             {% if htm %}
-            <div class="row gutters-70" style="    margin: 0 1rem;">
+            <div class="row gutters-70" id="show_sc" style="    margin: 0 2.3rem;">
               <div class="col-md-8 clickable-image"
                 style="direction: ltr;background-color: rgb(255, 255, 255);overflow: auto;max-height: 38rem;">
                 <figure>
-                  <div style="    padding: 0 10rem;">
-                    <p style="top: 109px;position: absolute;left: 29px;text-align: right;"> ارتفاع درخت : 75</p>
-                    <p style="top: 149px;position: absolute;left: 29px;text-align: right;"> تعداد گره ها : 75</p>
-                    <ul class="tree" style="pointer-events:none;    border-left: 2px solid black;">
+                  <div style="    padding: 0 5rem;">
+                    <ul class="tree" style="pointer-events:none;">
                     
                     </ul>
 
@@ -48,11 +48,11 @@
                 </figure>
               </div>
               <div class="col-md-4 redtem" style="text-align: right;    float: right;">
-                <h4> prefix : {{preorder}}</h4>
+                <h4 style="margin-top: 53px;">{{preorder}} : PreFix</h4>
 
-                <h4> postfix : {{postorder}}</h4>
+                <h4 style="    margin-top: 23px;">{{postorder}} : PostFix</h4>
 
-                <h4> infix : {{inorder}}</h4>
+                <h4 style="    margin-top: 23px;">{{inorder}} : InFix</h4>
 
 
 
@@ -72,19 +72,29 @@
 
 
 
+    <div class="loader-wrapper" id='uploadig_div' style="display: none;position: fixed;text-align: center;">
+
+      <div class="loader-indicator">
+          <span class="loader first_sm"></span>
+          <span class="loader second_sm"></span>
+          <span class="loader third_sm"></span>
+         
+      </div>
+
+ 
+  </div>
 
 
 
 
 
 
-
-    <section class="slider slider--bg">
+    <section class="slider slider--bg" style="direction: rtl;">
       <div id="myCarousel" class="carousel container slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <!-- <li data-target="#myCarousel" data-slide-to="2"></li> -->
         </ol>
 
         <div class="carousel-inner">
@@ -93,12 +103,9 @@
               <div class="">
                 <div class="text-center">
                   
-                  <h4>Michael T. Hill</h4>
-                  <h6>Designer</h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, </p>
+                  <h4>درخت عبارت</h4>
+                 
+                  <p style="    margin-bottom: 53px;">برای تجزیه، محاسبه و نمایش یک عبارت ریاضی (جبری، بولی، جبر مجوعه‌ها و …) شامل ثابت‌ها، متغیرها و عملگرهای یک‌عملونده (قرینه، قدر مطلق، نقیض و …) و دو عملونده (اشتراک، تقسیم و …) می توان از یک درخت دودویی بهره برد که به آن درخت عبارت می‌گویند. البته برای عبارت‌هایی که عملگرهایی با بیش از دو عملوند دارند هم می‌توان درخت عبارت تشکیل داد؛ اما به ندرت چنین عملوندهایی استفاده می‌شوند و درخت حاصل دیگر دودویی نخواهد بود.</p>
                   
                 </div>
               </div>
@@ -110,25 +117,22 @@
               <div class="">
                 <div class="text-center">
                  
-                  <h4>Leonard D. Downing</h4>
-                  <h6>Photographer</h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, </p>
-                  
+                  <h4 style="line-height: 4rem;">ارزش یابی عبارات ریاضی در ساختمان دادها (postfix)</h4>
+             
+                  <p >ابتدا برای عملیاتمان یک ساختار داده ای پشته را تعریف می کنیم . و سپس برنامه کاراکتر به کاراکتر عبارت ورودی را میخواند اگر ورودی عملوند باشد آنرا به داخل پشته push می کنیم در غیر اینصورت یعنی در صورتی که ورودی عملگر باشد به تعداد صحیح عملوند برای عملگر مورد نظر از پشته حذف یا pop می کنیم و سپس نتیجه ی مورد نظر را به داخل پشته اضافه می کنیم .</p>
+                 
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="item">
+          <!-- <div class="item">
             <div class="carousel-content">
               <div class="">
                 <div class="text-center">
                   
                   <h4>Paula R. Mullins</h4>
-                  <h6>Designer</h6>
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
@@ -137,7 +141,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+
+
+
         </div>
       </div>
     </section>
@@ -147,13 +154,28 @@
      
       <div class="container text-center">
         
-        <a href = "https://fediya.ir/" target="_blank" class="footer__paragraph">Copyright &copy; 2021 Mohammad hosein khamar -mohammad hosein fadavi , All Rights Reserved.</a>
+        <p class="footer__paragraph">Copyright &copy; 2021 <a href = "https://github.com/yasin1999/ExpressionTree" rel="noopener" target="_blank">Mohammad Hosein Khamar</a> - <a href = "https://github.com/mhfa1380/ExpressionTree" rel="noopener" target="_blank">Mohammad Hosein Fadavi</a> , All Rights Reserved.</p>
       </div>
     </footer>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.js" on integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
-  <script>        const image = document.querySelector(".clickable-image");
+  <script>
+  {% if expression == "تعریف نشده" %}
+      alert("عبارت وارد شده در سیستم تعریف نشده.")
+    {% endif %}
+  
+
+    function Uploading() {
+                        document.getElementById("search").style = 'margin-bottom: 8rem;text-align: center; margin-top: 5rem ;    direction: ltr;filter: brightness(0.5);pointer-events:none;';
+                        document.getElementById("uploadig_div").style.display = "block";
+
+                    }
+                   
+ 
+     
+     
+  const image = document.querySelector(".clickable-image");
     var str_t = 0
     image.addEventListener("click", () => {
       if (str_t == 0) {
@@ -168,6 +190,8 @@
     })
     var str='{{htm}}'.replaceAll('&lt;', "<").replaceAll('&gt;', ">");
     $(".tree").last().append(str); 
+
+    
   </script>
   <script src="{% static 'main/assets/jquery/jquery-3.2.1.min.js' %}"></script>
   <script src="{% static 'main/assets/bootstrap/js/bootstrap.min.js' %}"></script>
