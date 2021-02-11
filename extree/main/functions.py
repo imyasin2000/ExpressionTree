@@ -1,5 +1,6 @@
 answer_string=''
-class node():
+import operator
+class node(): 
     def __init__(self,value):
         self.value=value
         self.lchild=None
@@ -19,6 +20,7 @@ def what_is_this(char):
         return ('operator',validation[char])
 
 def with_or_without_brakets(ex):
+
     char_list=[]
     for  char in ex[1:-1]:
         if char=='(':
@@ -55,12 +57,11 @@ def born_children(ex):
     if ex[0]=='(' and ex[-1]==')' and with_or_without_brakets(ex) :
         ex=ex[1:-1]
     
-
     if ex[0]=='!':
         x=node(ex[0])
         x.rchild=born_children(ex[1:])
         return x
-    print(ex)
+    # print(ex)
     for (index,char) in enumerate(ex):
         temp=what_is_this(char)
 
@@ -162,10 +163,29 @@ def htmlconvertor(x):
         string=string+'</li>'
     return string  
 
-# x=born_children('a+b')
-                 
-print(with_or_without_brakets('(((a+b)-(c-d))-((x-w)-z-f))-2'))
-            
+def caculate_expression(x):
+    ops = {
+    '+' : operator.add,
+    '-' : operator.sub,
+    '*' : operator.mul,
+    '/' : operator.truediv,
+    '%' : operator.mod,
+    '^' : operator.xor,
+    }
+    if x.lchild==None or x.rchild==None:
+        return int(input(f'value for {x} :  '))
+    else:
+        ans1=caculate_expression(x.lchild)
+        op=(x.value)
+        ans2=caculate_expression(x.rchild)
+    
+    # print(ops[str(op)])
+    return (ops[str(op)](int(ans1),int(ans2)))
+
+
+# x=born_children('(a-b)/c-(f/t)')    
+# print(with_or_without_brakets('(((a'))
+# print(caculate_expression(x))
 # # print(htmlconvertor(x))
 # print(postorder(x))
 
