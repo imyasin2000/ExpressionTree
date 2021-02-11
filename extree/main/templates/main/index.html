@@ -30,10 +30,13 @@
           <form style="    text-align: center;" method='post'  onsubmit="Uploading()">
             {% csrf_token %}
 
-            <input type="text" name="search" id="search" placeholder="{{expression}}"
-              style="margin-bottom: 8rem;text-align: center; margin-top: 5rem ;    direction: ltr;">
-
+            {% if expression == 'تعریف نشده' or expression == ' . . . برسی'%}
+            <input type="text" name="search" id="search" placeholder="{{expression}}" style="margin-bottom: 8rem;text-align: center; margin-top: 5rem ;    direction: ltr;">
+            {%else%}
+            <input type="text" name="search" id="search" value="{{expression}}" placeholder =" . . . برسی" style="margin-bottom: 8rem;text-align: center; margin-top: 5rem ;    direction: ltr;">
+            {% endif %}
             {% if htm %}
+            
             <div class="row gutters-70" id="show_sc" style="    margin: 0 2.3rem;">
               <div class="col-md-8 clickable-image"
                 style="direction: ltr;background-color: rgb(255, 255, 255);overflow: auto;max-height: 38rem;">
@@ -48,11 +51,14 @@
                 </figure>
               </div>
               <div class="col-md-4 redtem" style="text-align: right;    float: right;">
-                <h4 style="margin-top: 53px;">{{preorder}} : PreFix</h4>
+                <h4 style="margin-top: 53px;">{{preorder}} : پیش ترتیب</h4>
 
-                <h4 style="    margin-top: 23px;">{{postorder}} : PostFix</h4>
+                <h4 style="    margin-top: 23px;">{{postorder}} : پس ترتیب</h4>
 
-                <h4 style="    margin-top: 23px;">{{inorder}} : InFix</h4>
+                <h4 style="    margin-top: 23px;">{{inorder}} : میان ترتیب</h4>
+                <h4 style="    margin-top: 23px;">{{height}} : ارتفاع درخت </h4>
+                <h4 style="    margin-top: 23px;">{{number_of_nodes}} : تعداد گره </h4>
+                
 
 
 

@@ -16,7 +16,9 @@ def main_views(request):
             posorder_expression=functions.postorder(x)
             preorder_expression=functions.preorder(x)
             inorder_expression=functions.inorder(x)
+            height=functions.height(x)
+            number_of_nodes=functions.number_of_nodes(x)
 
-            return render(request,'main/index.html',{'htm':htm ,'expression':expression,'postorder':posorder_expression , 'preorder':preorder_expression, 'inorder':inorder_expression})
+            return render(request,'main/index.html',{'htm':htm ,'expression':expression,'postorder':posorder_expression , 'preorder':preorder_expression, 'inorder':inorder_expression , 'height':height,'number_of_nodes':number_of_nodes})
         except:
             return render(request,'main/index.html' ,{'htm':'' ,'expression':'تعریف نشده'})

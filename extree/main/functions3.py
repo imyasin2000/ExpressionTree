@@ -18,30 +18,6 @@ def what_is_this(char):
         validation={'+':0,'-':0,'*':1,'/':1,'^':2 ,'!':3 }
         return ('operator',validation[char])
 
-def with_or_without_brakets(ex):
-    char_list=[]
-    for  char in ex[1:-1]:
-        if char=='(':
-            char_list.append('(')                
-
-        elif char==')':
-            if len(char_list)==0:
-                char_list.append(')')
-            else:
-                if char_list[-1]=='(':
-                    char_list=char_list[0:-1]
-                elif char_list[-1]==')':
-                    char_list.append(')')
-    if len(char_list)==0:
-        return True
-    else:
-        return False
-    
-                
-                
-
-
-
 def born_children(ex):
     #shart khateme 
     if len(ex)==1:
@@ -49,12 +25,12 @@ def born_children(ex):
 
     counter=0
     pointer=['300',None,'index']
-    # close_count=sum([i for (i,x) in enumerate(list(ex[1:-1])) if x == ")"])
-    # opencount=sum([i for (i,x) in enumerate(list(ex[1:-1])) if x == "("])
+    close_count=sum([i for (i,x) in enumerate(list(ex[1:-1])) if x == ")"])
+    opencount=sum([i for (i,x) in enumerate(list(ex[1:-1])) if x == "("])
 
-    if ex[0]=='(' and ex[-1]==')' and with_or_without_brakets(ex) :
+    if ex[0]=='(' and ex[-1]==')' and ex[1:-1].count(')')==ex[1:-1].count('(') and close_count>=opencount :
+
         ex=ex[1:-1]
-    
 
     if ex[0]=='!':
         x=node(ex[0])
@@ -124,16 +100,6 @@ def height(x):
         counter=max(height(x.rchild),counter)
     return counter+1
 
-def number_of_nodes(x):
-    counter=0
-    if x==None:
-        return 0
-    else:
-        counter+=number_of_nodes(x.lchild)
-        counter+=number_of_nodes(x.rchild)
-    return counter+1
-
-
 
 def dictionary_of_childrens(x):
     if x==None:
@@ -162,12 +128,12 @@ def htmlconvertor(x):
         string=string+'</li>'
     return string  
 
-# x=born_children('a+b')
+x=born_children('a+b')
                  
-print(with_or_without_brakets('(((a+b)-(c-d))-((x-w)-z-f))-2'))
+
             
-# # print(htmlconvertor(x))
-# print(postorder(x))
+# print(htmlconvertor(x))
+print(postorder(x))
 
 # <li>+<ul><li>x</li><li>y</li></ul></li>
 
